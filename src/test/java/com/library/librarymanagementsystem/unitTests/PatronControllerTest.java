@@ -46,7 +46,7 @@ public class PatronControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(patronList, response.getBody());
     }
-    
+
 
     @Test
     @WithMockUser(authorities = "ROLE_LIBRARIAN")

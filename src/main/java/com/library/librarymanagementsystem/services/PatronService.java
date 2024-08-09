@@ -7,6 +7,7 @@ import com.library.librarymanagementsystem.repositories.PatronRepository;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,7 @@ public class PatronService {
                 .collect(Collectors.toList());
     }
 
+    @Cacheable(value="patrons", key="#id")
     public PatronDTO getPatronById(Long id) {
         Patron patron = patronRepository.findById(id)
                 .orElseThrow(() -> new PatronNotFoundException("Patron not found"));

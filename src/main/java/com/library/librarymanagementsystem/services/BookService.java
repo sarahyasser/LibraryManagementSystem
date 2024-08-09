@@ -4,13 +4,11 @@ import com.library.librarymanagementsystem.dtos.BookRequestDTO;
 import com.library.librarymanagementsystem.dtos.BookResponseDTO;
 import com.library.librarymanagementsystem.models.Book;
 import com.library.librarymanagementsystem.models.Librarian;
-import com.library.librarymanagementsystem.models.Patron;
-import com.library.librarymanagementsystem.models.User;
 import com.library.librarymanagementsystem.repositories.BookRepository;
 import com.library.librarymanagementsystem.repositories.LibrarianRepository;
 import com.library.librarymanagementsystem.repositories.PatronRepository;
 import com.library.librarymanagementsystem.repositories.UserRepository;
-import com.library.librarymanagementsystem.security.JwtService;
+import org.springframework.cache.annotation.Cacheable;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +19,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class BookService {
@@ -39,12 +36,13 @@ public class BookService {
     @Autowired
     private LibrarianRepository librarianRepository;
 
-
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
     }
 
+    @Cacheable(value="books", key="#id")
     public Optional<Book> getBookById(Long id) {
+        System.out.println("in");
         return bookRepository.findById(id);
     }
 

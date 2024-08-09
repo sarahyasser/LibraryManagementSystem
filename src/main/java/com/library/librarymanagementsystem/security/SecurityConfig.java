@@ -30,6 +30,14 @@ public class SecurityConfig {
     public JwtAuthenticationFilter authenticationJwtTokenFilter() {
         return new JwtAuthenticationFilter();
     }
+    
+    private static final String[] SWAGGER_AUTHLIST = {
+            "/api/v1/auth/**",
+            "/v3/api-docs/**",
+            "/v3/api-docs.yaml",
+            "/swagger-ui/**",
+            "/swagger-ui.html"
+    };
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -47,6 +55,7 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers(SWAGGER_AUTHLIST).permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(withDefaults());
         http.authenticationProvider(authenticationProvider());

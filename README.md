@@ -8,6 +8,8 @@ The Library Management System (LMS) is a Spring Boot application designed to man
 
 Both librarians and patrons can log in and register to access their respective functionalities. The application uses JWT (JSON Web Token) for authentication and role-based authorization to control access to different features.
 
+Swagger is available at `http://localhost:8080/swagger-ui/index.html#/` after running the project successfully.
+
 ## Prerequisites
 
 - **Java Development Kit (JDK)**: Ensure Java 17 SDK is installed on your machine.

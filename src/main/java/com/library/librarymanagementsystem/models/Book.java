@@ -49,5 +49,14 @@ public class Book {
         this.quantity = quantity;
         this.librarian = librarian;
     }
+    public Book(Long id,String title, String author, int publicationYear, String isbn, int quantity, Librarian librarian) {
+        this.id=id;
+        this.title = title;
+        this.author = author;
+        this.publicationYear = publicationYear;
+        this.isbn = isbn;
+        this.quantity = quantity;
+        this.librarian = librarian;
+    }
 
 }
